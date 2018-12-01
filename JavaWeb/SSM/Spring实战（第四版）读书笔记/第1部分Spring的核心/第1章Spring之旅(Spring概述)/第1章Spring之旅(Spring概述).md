@@ -52,24 +52,23 @@ Spring赋予POJO魔力的方式之一就是通过DI来装配它们。让我们�
             public Quest quest() {
                 return new SlayDragonQuest(System.out);
             }
-
         }
+
 - 使用Bean
-    import org.springframework.context.support.
-                   ClassPathXmlApplicationContext;
+        import org.springframework.context.support.
+                    ClassPathXmlApplicationContext;
 
-    public class KnightMain {
+        public class KnightMain {
 
-    public static void main(String[] args) throws Exception {
-        ClassPathXmlApplicationContext context = 
-            new ClassPathXmlApplicationContext(
-                "META-INF/spring/knight.xml");
-        Knight knight = context.getBean(Knight.class);
-        knight.embarkOnQuest();
-        context.close();
-    }
-
-    }
+            public static void main(String[] args) throws Exception {
+                ClassPathXmlApplicationContext context = 
+                    new ClassPathXmlApplicationContext(
+                        "META-INF/spring/knight.xml");
+                Knight knight = context.getBean(Knight.class);
+                knight.embarkOnQuest();
+                context.close();
+            }
+        }
 加载上下文，并在上下文中获取Bean
 
 
@@ -86,31 +85,31 @@ programming，AOP）允许你把遍布应用各处的功能分离出来形成可
 灵活地应用到系统中，你的核心应用甚至根本不知道它们的存在。这是一个非常强大的理念，可以
 将安全、事务和日志关注点与核心业务逻辑相分离。
 
-<bean id="knight" class="sia.knights.BraveKnight">
-    <constructor-arg ref="quest" />
-</bean>
+        <bean id="knight" class="sia.knights.BraveKnight">
+            <constructor-arg ref="quest" />
+        </bean>
 
-<bean id="quest" class="sia.knights.SlayDragonQuest">
-    <constructor-arg value="#{T(System).out}" />
-</bean>
+        <bean id="quest" class="sia.knights.SlayDragonQuest">
+            <constructor-arg value="#{T(System).out}" />
+        </bean>
 
-<bean id="minstrel" class="sia.knights.Minstrel">
-    <constructor-arg value="#{T(System).out}" />
-</bean>
+        <bean id="minstrel" class="sia.knights.Minstrel">
+            <constructor-arg value="#{T(System).out}" />
+        </bean>
 
-<aop:config>
-    <aop:aspect ref="minstrel">
-    //定义切点
-        <aop:pointcut id="embark"
-            expression="execution(* *.embarkOnQuest(..))"/>
-    //声明前置通知
-        <aop:before pointcut-ref="embark" 
-            method="singBeforeQuest"/>
-    //声明后置通知
-        <aop:after pointcut-ref="embark" 
-            method="singAfterQuest"/>
-    </aop:aspect>
-</aop:config>
+        <aop:config>
+            <aop:aspect ref="minstrel">
+            //定义切点
+                <aop:pointcut id="embark"
+                    expression="execution(* *.embarkOnQuest(..))"/>
+            //声明前置通知
+                <aop:before pointcut-ref="embark" 
+                    method="singBeforeQuest"/>
+            //声明后置通知
+                <aop:after pointcut-ref="embark" 
+                    method="singAfterQuest"/>
+            </aop:aspect>
+        </aop:config>
 
 ### 使用模板消除样板式代码
 使用Spring的JdbcTemplate
