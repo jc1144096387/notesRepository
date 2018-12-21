@@ -39,8 +39,8 @@ Spring赋予POJO魔力的方式之一就是通过DI来装配它们。让我们�
         //  SlayDragonQuest bean的声明使用了Spring表达式语言（Spring Expression
             Language），将System.out（这是一个PrintStream）传入到了SlayDragonQuest的构造
             器中。
-    + 基于Java的配置
-        @Configuration
+    + 基于Java的配置    
+        @Configuration   
         public class KnightConfig {
 
             @Bean
@@ -54,7 +54,7 @@ Spring赋予POJO魔力的方式之一就是通过DI来装配它们。让我们�
             }
         }
 
-- 使用Bean
+- 使用Bean    
         import org.springframework.context.support.
                     ClassPathXmlApplicationContext;
 
@@ -130,21 +130,20 @@ programming，AOP）允许你把遍布应用各处的功能分离出来形成可
 bean就可以使用了。一旦该bean不再被使用，则由Java自动进行垃圾回收   
 
 相比之下，Spring容器中的bean的生命周期就显得相对复杂多了
-1．Spring对bean进行实例化；
-2．Spring将值和bean的引用注入到bean对应的属性中；
-3．如果bean实现了BeanNameAware接口，Spring将bean的ID传递给setBean-Name()方法；
-4．如果bean实现了BeanFactoryAware接口，Spring将调用setBeanFactory()方法，将
-BeanFactory容器实例传入；
+1．Spring对bean进行实例化；   
+2．Spring将值和bean的引用注入到bean对应的属性中；   
+3．如果bean实现了BeanNameAware接口，Spring将bean的ID传递给setBean-Name()方法；   
+4．如果bean实现了BeanFactoryAware接口，Spring将调用setBeanFactory()方法，将   
+BeanFactory容器实例传入；   
 5．如果bean实现了ApplicationContextAware接口，Spring将调
-用setApplicationContext()方法，将bean所在的应用上下文的引用传入进来；
-6．如果bean实现了BeanPostProcessor接口，Spring将调用它们的postProcessBeforeInitialization()方法；
-7．如果bean实现了InitializingBean接口，Spring将调用它们的afterPropertiesSet()方法。类似地，如果bean使用init-method声明了初始化方法，该方法也
-会被调用；
-8．如果bean实现了BeanPostProcessor接口，Spring将调用它们的postProcessAfterInitialization()方法；
+用setApplicationContext()方法，将bean所在的应用上下文的引用传入进来；   
+6．如果bean实现了BeanPostProcessor接口，Spring将调用它们的postProcessBeforeInitialization()方法；   
+7．如果bean实现了InitializingBean接口，Spring将调用它们的afterPropertiesSet()方法。类似地，如果bean使用init-method声明了初始化方法，该方法也会被调用；   
+8．如果bean实现了BeanPostProcessor接口，Spring将调用它们的postProcessAfterInitialization()方法；   
 9．此时，bean已经准备就绪，可以被应用程序使用了，它们将一直驻留在应用上下文中，直到该
-应用上下文被销毁；
+应用上下文被销毁；   
 10．如果bean实现了DisposableBean接口，Spring将调用它的destroy()接口方法。同样，
-如果bean使用destroy-method声明了销毁方法，该方法也会被调用。
+如果bean使用destroy-method声明了销毁方法，该方法也会被调用。    
 
 ## 俯瞰Spring风景线
 
